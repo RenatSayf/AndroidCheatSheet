@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!--    TODO Navigation Step 2
+1. In the Project window, right-click on the res directory and select New > Android Resource File. The New Resource File dialog appears.
+2. Type a name in the File name field, such as "nav_graph".
+3. Select Navigation from the Resource type drop-down list, and then click OK.-->
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.renatsayf.androidcheatsheet.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>
