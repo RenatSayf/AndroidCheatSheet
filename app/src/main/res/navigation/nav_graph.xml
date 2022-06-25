@@ -10,9 +10,11 @@
 2. Type a name in the File name field, such as "nav_graph".
 3. Select Navigation from the Resource type drop-down list, and then click OK.-->
 
+    <!--region TODO Navigation Step 4 - start screen-->
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.renatsayf.androidcheatsheet.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <!--endregion-->
 </navigation>
