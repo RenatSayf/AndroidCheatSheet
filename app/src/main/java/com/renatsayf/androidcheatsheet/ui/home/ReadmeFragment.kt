@@ -19,7 +19,8 @@ private const val START_URL = "https://github.com/RenatSayf/AndroidCheatSheet/bl
 
 class ReadmeFragment : Fragment() {
 
-    private lateinit var binding: FragmentReadmeBinding
+    private lateinit var binding: FragmentReadmeBinding //TODO VIewBinding Step 2
+
     private val readmeVM: ReadmeViewModel by lazy {
         ViewModelProvider(this)[ReadmeViewModel::class.java]
     }
@@ -28,6 +29,8 @@ class ReadmeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        //TODO VIewBinding Step 3 - Done
         binding = FragmentReadmeBinding.inflate(inflater, container, false)
         return binding.root
     }

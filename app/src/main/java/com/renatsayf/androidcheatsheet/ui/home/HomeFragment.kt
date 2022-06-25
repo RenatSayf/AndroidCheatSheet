@@ -10,7 +10,7 @@ import com.renatsayf.androidcheatsheet.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding //TODO VIewBinding Step 2
+    private lateinit var binding: FragmentHomeBinding
 
     private val sectionsAdapter: SectionsAdapter by lazy {
         SectionsAdapter()
@@ -21,7 +21,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        //TODO VIewBinding Step 3 - Done
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
