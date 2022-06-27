@@ -1,10 +1,10 @@
-package com.renatsayf.androidcheatsheet.ui.home
+package com.renatsayf.androidcheatsheet.ui.sections.webview
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ReadmeViewModel : ViewModel() {
+class WebViewViewModel : ViewModel() {
 
     sealed class State {
         data class PageStarted(val url: String): State()

@@ -1,4 +1,4 @@
-package com.renatsayf.androidcheatsheet.ui.home
+package com.renatsayf.androidcheatsheet.ui.sections.webview
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -18,7 +18,7 @@ import com.renatsayf.androidcheatsheet.databinding.FragmentReadmeBinding
 private const val WEB_VIEW_BUNDLE = "WEB_VIEW_BUNDLE"
 private const val START_URL = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/README.md"
 
-class ReadmeFragment : Fragment() {
+class WebViewFragment : Fragment() {
 
     companion object {
         const val KEY_URL = "KEY_URL"
@@ -26,8 +26,8 @@ class ReadmeFragment : Fragment() {
 
     private lateinit var binding: FragmentReadmeBinding //TODO VIewBinding Step 2
 
-    private val readmeVM: ReadmeViewModel by lazy {
-        ViewModelProvider(this)[ReadmeViewModel::class.java]
+    private val readmeVM: WebViewViewModel by lazy {
+        ViewModelProvider(this)[WebViewViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -64,14 +64,14 @@ class ReadmeFragment : Fragment() {
                         super.onPageStarted(view, url, favicon)
 
                         binding.progressBar.visibility = View.VISIBLE
-                        readmeVM.setState(ReadmeViewModel.State.PageStarted(url ?: START_URL))
+                        readmeVM.setState(WebViewViewModel.State.PageStarted(url ?: START_URL))
                     }
 
                     override fun onPageFinished(view: WebView?, url: String?) {
                         super.onPageFinished(view, url)
 
                         binding.progressBar.visibility = View.GONE
-                        readmeVM.setState(ReadmeViewModel.State.PageFinished(url ?: START_URL))
+                        readmeVM.setState(WebViewViewModel.State.PageFinished(url ?: START_URL))
                     }
                 }
                 //endregion
@@ -93,10 +93,10 @@ class ReadmeFragment : Fragment() {
 
             readmeVM.state.observe(viewLifecycleOwner) { state ->
                 when(state) {
-                    is ReadmeViewModel.State.PageFinished -> {
+                    is WebViewViewModel.State.PageFinished -> {
 
                     }
-                    is ReadmeViewModel.State.PageStarted -> {
+                    is WebViewViewModel.State.PageStarted -> {
 
                     }
                 }
