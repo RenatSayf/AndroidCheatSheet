@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.renatsayf.androidcheatsheet.databinding.ItemSectionBinding
+import com.renatsayf.androidcheatsheet.models.SectionHeader
 
-class SectionsAdapter : RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
-
-    private val list = listOf("Навигация", "View binding")
+class SectionsAdapter(private val headers: List<SectionHeader>) : RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemSectionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -16,17 +15,17 @@ class SectionsAdapter : RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val view = holder.itemView
-        holder.bind(list[position])
+        holder.bind(headers[position])
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return headers.size
     }
 
     inner class ViewHolder(private val binding: ItemSectionBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: String) {
-            binding.tvHeader.text = item
+        fun bind(item: SectionHeader) {
+            binding.tvHeader.text = item.header
         }
     }
 }

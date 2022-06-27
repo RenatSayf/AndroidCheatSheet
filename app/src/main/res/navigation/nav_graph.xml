@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/readmeFragment">
+    app:startDestination="@id/homeFragment">
 
     <!--    TODO Navigation Step 2
 1. In the Project window, right-click on the res directory and select New > Android Resource File. The New Resource File dialog appears.
@@ -16,11 +16,12 @@
         android:name="com.renatsayf.androidcheatsheet.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <!--endregion-->
 
     <fragment
         android:id="@+id/readmeFragment"
         android:name="com.renatsayf.androidcheatsheet.ui.home.ReadmeFragment"
         android:label="fragment_readme"
         tools:layout="@layout/fragment_readme" />
-    <!--endregion-->
+
 </navigation>

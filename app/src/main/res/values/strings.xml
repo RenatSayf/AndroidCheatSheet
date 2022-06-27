@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AndroidCheatSheet</string>
+
+    <string name="header_navigation">Навигация</string>
+    <string name="header_view_binding">View binding</string>
+    <string name="header_web_view">WebView</string>
+
+
 </resources>
