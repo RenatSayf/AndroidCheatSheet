@@ -26,7 +26,7 @@ class WebViewFragment : Fragment() {
 
     private lateinit var binding: FragmentReadmeBinding //TODO VIewBinding Step 2
 
-    private val readmeVM: WebViewViewModel by lazy {
+    private val webViewVM: WebViewViewModel by lazy {
         ViewModelProvider(this)[WebViewViewModel::class.java]
     }
 
@@ -64,14 +64,14 @@ class WebViewFragment : Fragment() {
                         super.onPageStarted(view, url, favicon)
 
                         binding.progressBar.visibility = View.VISIBLE
-                        readmeVM.setState(WebViewViewModel.State.PageStarted(url ?: START_URL))
+                        webViewVM.setState(WebViewViewModel.State.PageStarted(url ?: START_URL))
                     }
 
                     override fun onPageFinished(view: WebView?, url: String?) {
                         super.onPageFinished(view, url)
 
                         binding.progressBar.visibility = View.GONE
-                        readmeVM.setState(WebViewViewModel.State.PageFinished(url ?: START_URL))
+                        webViewVM.setState(WebViewViewModel.State.PageFinished(url ?: START_URL))
                     }
                 }
                 //endregion
@@ -91,13 +91,16 @@ class WebViewFragment : Fragment() {
             }
             //endregion
 
-            readmeVM.state.observe(viewLifecycleOwner) { state ->
+            webViewVM.state.observe(viewLifecycleOwner) { state ->
                 when(state) {
                     is WebViewViewModel.State.PageFinished -> {
 
                     }
                     is WebViewViewModel.State.PageStarted -> {
 
+                    }
+                    WebViewViewModel.State.PageClosed -> {
+                        binding.progressBar.visibility = View.VISIBLE
                     }
                 }
             }
@@ -124,6 +127,7 @@ class WebViewFragment : Fragment() {
                 if (binding.webView.canGoBack()) {
                     binding.webView.goBack()
                 } else {
+                    webViewVM.setState(WebViewViewModel.State.PageClosed)
                     val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
                     val stackCount = navHostFragment?.childFragmentManager?.backStackEntryCount ?: 0
                     if (stackCount == 0) {
