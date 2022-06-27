@@ -29,7 +29,7 @@
         android:layout_marginStart="0dp"
         android:padding="12dp"
         tools:text="Section Header"
-        android:textColor="@color/black"
+        android:textColor="@color/color_scale_blue_4"
         android:textSize="18sp"
         android:background="@drawable/ripple_main"
         />
@@ -43,6 +43,7 @@
         app:layout_constraintStart_toStartOf="@+id/tv_header"
         app:layout_constraintEnd_toEndOf="@+id/tv_header"
         android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
