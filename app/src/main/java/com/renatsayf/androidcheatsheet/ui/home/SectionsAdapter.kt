@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.renatsayf.androidcheatsheet.databinding.ItemSectionBinding
 import com.renatsayf.androidcheatsheet.models.SectionHeader
 
-class SectionsAdapter(private val headers: List<SectionHeader>) : RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
+class SectionsAdapter(
+    private val headers: List<SectionHeader>,
+    private val listener: Listener) : RecyclerView.Adapter<SectionsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemSectionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -26,6 +28,14 @@ class SectionsAdapter(private val headers: List<SectionHeader>) : RecyclerView.A
 
         fun bind(item: SectionHeader) {
             binding.tvHeader.text = item.header
+
+            binding.root.setOnClickListener {
+                listener.sectionItemClick(item.url)
+            }
         }
+    }
+
+    interface Listener {
+        fun sectionItemClick(url: String)
     }
 }

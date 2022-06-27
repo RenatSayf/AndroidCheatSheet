@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/ripple_main">
+    >
 
     <View
         android:id="@+id/view_point"
@@ -24,19 +24,25 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/view_point"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="0dp"
-        android:padding="8dp"
+        android:padding="12dp"
         tools:text="Section Header"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:background="@drawable/ripple_main"
         />
 
     <View
         android:id="@+id/view_separator"
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"
+        android:layout_width="0dp"
+        android:layout_height="0.4dp"
+        android:alpha="0.5"
         app:layout_constraintTop_toBottomOf="@+id/tv_header"
+        app:layout_constraintStart_toStartOf="@+id/tv_header"
+        app:layout_constraintEnd_toEndOf="@+id/tv_header"
+        android:layout_marginStart="12dp"
         android:background="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

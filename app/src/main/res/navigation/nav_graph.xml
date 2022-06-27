@@ -15,7 +15,11 @@
         android:id="@+id/homeFragment"
         android:name="com.renatsayf.androidcheatsheet.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_readmeFragment"
+            app:destination="@id/readmeFragment" />
+    </fragment>
     <!--endregion-->
 
     <fragment

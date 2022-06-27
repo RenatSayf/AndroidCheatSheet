@@ -12,12 +12,17 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.renatsayf.androidcheatsheet.R
 import com.renatsayf.androidcheatsheet.databinding.FragmentReadmeBinding
 
 private const val WEB_VIEW_BUNDLE = "WEB_VIEW_BUNDLE"
 private const val START_URL = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/README.md"
 
 class ReadmeFragment : Fragment() {
+
+    companion object {
+        const val KEY_URL = "KEY_URL"
+    }
 
     private lateinit var binding: FragmentReadmeBinding //TODO VIewBinding Step 2
 
@@ -38,6 +43,8 @@ class ReadmeFragment : Fragment() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val url = arguments?.getString(KEY_URL)
 
         with(binding) {
 
@@ -70,14 +77,14 @@ class ReadmeFragment : Fragment() {
                 //endregion
                 //region TODO WebView - Restore state
                 if (savedInstanceState == null) {
-                    loadUrl(START_URL)
+                    loadUrl(url ?: START_URL)
                 }
                 else {
                     val bundle = savedInstanceState.getBundle(WEB_VIEW_BUNDLE)
                     if (bundle != null) {
                         restoreState(bundle)
                     } else {
-                        loadUrl(START_URL)
+                        loadUrl(url ?: START_URL)
                     }
                 }
                 //endregion
@@ -110,18 +117,20 @@ class ReadmeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        requireActivity().onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
 
-                //region TODO WebView - navigation
+                //region TODO WebView - handle back navigation
                 if (binding.webView.canGoBack()) {
                     binding.webView.goBack()
-                }
-                else {
-                    if (requireActivity().supportFragmentManager.backStackEntryCount > 0) {
+                } else {
+                    val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+                    val stackCount = navHostFragment?.childFragmentManager?.backStackEntryCount ?: 0
+                    if (stackCount == 0) {
+                        requireActivity().finish()
+                    } else {
                         findNavController().popBackStack()
                     }
-                    else requireActivity().finish()
                 }
                 //endregion
             }
