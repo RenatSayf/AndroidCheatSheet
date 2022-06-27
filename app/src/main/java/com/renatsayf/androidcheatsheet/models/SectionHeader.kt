@@ -16,7 +16,15 @@ data class SectionHeader(
 
                 SectionHeader(
                     header = App.INSTANCE.getString(R.string.header_navigation),
-                    url = ""
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/Navigation.md"
+                ),
+                SectionHeader(
+                    header = App.INSTANCE.getString(R.string.header_view_binding),
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/View%20binding.md"
+                ),
+                SectionHeader(
+                    header = App.INSTANCE.getString(R.string.header_web_view),
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/WebView.md"
                 )
             )
         }
