@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.renatsayf.androidcheatsheet.R
 import com.renatsayf.androidcheatsheet.databinding.FragmentHomeBinding
 import com.renatsayf.androidcheatsheet.models.SectionHeader
+import com.renatsayf.androidcheatsheet.ui.sections.webview.WebViewFragment
 
 class HomeFragment : Fragment(), SectionsAdapter.Listener {
 
@@ -36,7 +37,7 @@ class HomeFragment : Fragment(), SectionsAdapter.Listener {
 
     override fun sectionItemClick(url: String) {
         findNavController().navigate(R.id.action_homeFragment_to_readmeFragment, Bundle().apply {
-            putString(ReadmeFragment.KEY_URL, url)
+            putString(WebViewFragment.KEY_URL, url)
         })
     }
 

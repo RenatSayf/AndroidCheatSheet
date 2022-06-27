@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/readmeFragment"
-        android:name="com.renatsayf.androidcheatsheet.ui.home.ReadmeFragment"
+        android:name="com.renatsayf.androidcheatsheet.ui.sections.webview.WebViewFragment"
         android:label="fragment_readme"
         tools:layout="@layout/fragment_readme" />
 
