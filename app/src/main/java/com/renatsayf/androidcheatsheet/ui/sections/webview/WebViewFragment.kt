@@ -62,15 +62,11 @@ class WebViewFragment : Fragment() {
 
                     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                         super.onPageStarted(view, url, favicon)
-
-                        binding.progressBar.visibility = View.VISIBLE
                         webViewVM.setState(WebViewViewModel.State.PageStarted(url ?: START_URL))
                     }
 
                     override fun onPageFinished(view: WebView?, url: String?) {
                         super.onPageFinished(view, url)
-
-                        binding.progressBar.visibility = View.GONE
                         webViewVM.setState(WebViewViewModel.State.PageFinished(url ?: START_URL))
                     }
                 }
@@ -94,10 +90,10 @@ class WebViewFragment : Fragment() {
             webViewVM.state.observe(viewLifecycleOwner) { state ->
                 when(state) {
                     is WebViewViewModel.State.PageFinished -> {
-
+                        binding.progressBar.visibility = View.GONE
                     }
                     is WebViewViewModel.State.PageStarted -> {
-
+                        binding.progressBar.visibility = View.VISIBLE
                     }
                     WebViewViewModel.State.PageClosed -> {
                         binding.progressBar.visibility = View.VISIBLE
