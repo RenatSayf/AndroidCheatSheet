@@ -80,6 +80,7 @@ class WebViewFragment : Fragment() {
                     override fun onPageFinished(view: WebView?, url: String?) {
                         super.onPageFinished(view, url)
                         webViewVM.setState(WebViewViewModel.State.PageFinished(url ?: START_URL))
+                        webView.findAllAsync("xxxxxxxxxx")
                     }
                 }
                 //endregion
@@ -109,7 +110,6 @@ class WebViewFragment : Fragment() {
                     }
                     WebViewViewModel.State.PageClosed -> {
                         binding.progressBar.visibility = View.VISIBLE
-                        webView.findAllAsync("there is demo")
                     }
                     is WebViewViewModel.State.ThereIsDemonstration -> {
                         binding.btnShowResult.visibility = View.VISIBLE
