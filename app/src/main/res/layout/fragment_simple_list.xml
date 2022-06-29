@@ -11,7 +11,8 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/recycler_view_example_title"/>
+        app:title="@string/recycler_view_example_title"
+        app:subtitle="@string/recycler_view_example_subtitle"/>
 
     <View
         android:layout_width="match_parent"

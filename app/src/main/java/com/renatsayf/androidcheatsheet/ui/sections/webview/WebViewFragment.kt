@@ -66,6 +66,7 @@ class WebViewFragment : Fragment() {
                         if (p1 > 0 && !section.deepLink.isNullOrEmpty()) {
                             webViewVM.setState(WebViewViewModel.State.ThereIsDemonstration(section.deepLink))
                         }
+                        else webViewVM.setState(WebViewViewModel.State.ThereIsDemonstration(null))
                     }
                 })
 
@@ -112,9 +113,13 @@ class WebViewFragment : Fragment() {
                         binding.progressBar.visibility = View.VISIBLE
                     }
                     is WebViewViewModel.State.ThereIsDemonstration -> {
-                        binding.btnShowResult.visibility = View.VISIBLE
-                        binding.btnShowResult.setOnClickListener {
-                            findNavController().navigate(Uri.parse(state.deepLink))
+                        if (!state.deepLink.isNullOrEmpty()) {
+                            binding.btnShowResult.visibility = View.VISIBLE
+                            binding.btnShowResult.setOnClickListener {
+                                findNavController().navigate(Uri.parse(state.deepLink))
+                            }
+                        } else {
+                            binding.btnShowResult.visibility = View.GONE
                         }
                     }
                 }
