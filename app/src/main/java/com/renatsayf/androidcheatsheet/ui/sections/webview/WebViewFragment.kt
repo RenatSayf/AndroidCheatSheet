@@ -63,7 +63,9 @@ class WebViewFragment : Fragment() {
 
                 setFindListener(object : WebView.FindListener {
                     override fun onFindResultReceived(p0: Int, p1: Int, p2: Boolean) {
-                        return
+                        if (p1 > 0 && !section.deepLink.isNullOrEmpty()) {
+                            webViewVM.setState(WebViewViewModel.State.ThereIsDemonstration(section.deepLink))
+                        }
                     }
                 })
 
@@ -101,16 +103,13 @@ class WebViewFragment : Fragment() {
                 when(state) {
                     is WebViewViewModel.State.PageFinished -> {
                         binding.progressBar.visibility = View.GONE
-                        if (!section.deepLink.isNullOrEmpty()) {
-                            webViewVM.setState(WebViewViewModel.State.ThereIsDemonstration(section.deepLink))
-                            webView.findAllAsync(":heavy_check_mark:")
-                        }
                     }
                     is WebViewViewModel.State.PageStarted -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
                     WebViewViewModel.State.PageClosed -> {
                         binding.progressBar.visibility = View.VISIBLE
+                        webView.findAllAsync("there is demo")
                     }
                     is WebViewViewModel.State.ThereIsDemonstration -> {
                         binding.btnShowResult.visibility = View.VISIBLE
