@@ -81,7 +81,7 @@ class WebViewFragment : Fragment() {
                     override fun onPageFinished(view: WebView?, url: String?) {
                         super.onPageFinished(view, url)
                         webViewVM.setState(WebViewViewModel.State.PageFinished(url ?: START_URL))
-                        webView.findAllAsync("xxxxxxxxxx")
+                        webView.findAllAsync(getString(R.string.demo_sign))
                     }
                 }
                 //endregion

@@ -11,6 +11,7 @@
 
     <string name="recycler_view_example_title">RecyclerView.</string>
     <string name="recycler_view_example_subtitle">Демонстрация работы</string>
+    <string name="demo_sign">xxxxxxxxxx</string>
 
 
 </resources>
