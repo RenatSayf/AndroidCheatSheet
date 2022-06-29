@@ -25,6 +25,10 @@ data class SectionHeader(
                 SectionHeader(
                     header = App.INSTANCE.getString(R.string.header_web_view),
                     url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/WebView.md"
+                ),
+                SectionHeader(
+                    header = App.INSTANCE.getString(R.string.header_recycler_view),
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/Recycler%20view.md"
                 )
             )
         }

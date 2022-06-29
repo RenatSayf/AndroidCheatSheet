@@ -1,9 +1,12 @@
 <resources>
-    <string name="app_name">AndroidCheatSheet</string>
+    <string name="app_name">Андроид. Шпаргалки по разработке</string>
 
     <string name="header_navigation">Навигация</string>
     <string name="header_view_binding">View binding</string>
     <string name="header_web_view">WebView</string>
+    <string name="header_recycler_view">Recycler view</string>
+
+    <string name="recycler_view_example_title">RecyclerView. Демонстрация работы</string>
 
 
 </resources>
