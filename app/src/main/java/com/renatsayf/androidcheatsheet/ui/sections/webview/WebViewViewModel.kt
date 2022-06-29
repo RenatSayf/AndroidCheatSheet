@@ -10,6 +10,7 @@ class WebViewViewModel : ViewModel() {
         data class PageStarted(val url: String): State()
         data class PageFinished(val url: String): State()
         object PageClosed: State()
+        data class ThereIsDemonstration(val deepLink: String): State()
     }
 
     private var _state = MutableLiveData<State>()

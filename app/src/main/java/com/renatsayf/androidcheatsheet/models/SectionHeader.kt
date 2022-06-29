@@ -2,11 +2,14 @@ package com.renatsayf.androidcheatsheet.models
 
 import com.renatsayf.androidcheatsheet.App
 import com.renatsayf.androidcheatsheet.R
+import java.io.Serializable
 
 data class SectionHeader(
     val header: String,
-    val url: String
-) {
+    val url: String,
+    val isDemonstration: Boolean = false,
+    val deepLink: String? = null
+) : Serializable {
 
     companion object {
 
@@ -28,7 +31,9 @@ data class SectionHeader(
                 ),
                 SectionHeader(
                     header = App.INSTANCE.getString(R.string.header_recycler_view),
-                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/Recycler%20view.md"
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/Recycler%20view.md",
+                    isDemonstration = true,
+                    deepLink = "app://recycler_view/simple_list"
                 )
             )
         }

@@ -30,12 +30,12 @@ class SectionsAdapter(
             binding.tvHeader.text = item.header
 
             binding.root.setOnClickListener {
-                listener.sectionItemClick(item.url)
+                listener.sectionItemClick(item)
             }
         }
     }
 
     interface Listener {
-        fun sectionItemClick(url: String)
+        fun sectionItemClick(item: SectionHeader)
     }
 }

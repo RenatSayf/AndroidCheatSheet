@@ -10,10 +10,11 @@ import com.renatsayf.androidcheatsheet.models.SimpleItem
 
 //region Hint. RecyclerView implementation. Create the class of adapter
 class SimpleAdapter(
-    private val items: List<SimpleItem>,
     private val listener: Listener
 ) : RecyclerView.Adapter<SimpleAdapter.ViewHolder>() //Hint RecyclerView. Inherit your adapter from RecyclerView.Adapter<YourViewHolder>
 {
+
+    private val items = mutableListOf<SimpleItem>()
 
     //region Hint. RecyclerView. Override necessary methods
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,6 +31,12 @@ class SimpleAdapter(
     }
     //endregion
 
+    //region Hint. RecyclerView. Function for items adding
+    fun addItems(list: List<SimpleItem>) {
+        items.addAll(list)
+        notifyDataSetChanged()
+    }
+    //endregion
 
     //region Hint. RecyclerView. Create inner class ViewHolder, which inherently from RecyclerView.ViewHolder
     inner class ViewHolder(private val binding: ItemSimpleViewBinding) : RecyclerView.ViewHolder(binding.root) {

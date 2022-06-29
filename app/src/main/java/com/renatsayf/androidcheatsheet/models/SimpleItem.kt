@@ -17,8 +17,8 @@ data class SimpleItem(
 
                 mockList.add(
                     SimpleItem(
-                        header = "Header $index",
-                        content = """Text $index. Lorem ipsum dolor sit amet. Cum autem pariatur et enim 
+                        header = "Header ${index + 1}",
+                        content = """Text ${index + 1}. Lorem ipsum dolor sit amet. Cum autem pariatur et enim 
                             |voluptatum 33 minus porro et temporibus illo ut porro doloremque. 
                             |Ad molestiae vero et rerum consequatur id maiores sequi. 
                             |In unde maiores ea officiis voluptatum eos incidunt repellendus.""".trimMargin()

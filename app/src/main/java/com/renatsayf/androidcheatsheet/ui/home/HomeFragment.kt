@@ -35,9 +35,9 @@ class HomeFragment : Fragment(), SectionsAdapter.Listener {
         binding.rvContent.adapter = sectionsAdapter
     }
 
-    override fun sectionItemClick(url: String) {
+    override fun sectionItemClick(item: SectionHeader) {
         findNavController().navigate(R.id.action_homeFragment_to_readmeFragment, Bundle().apply {
-            putString(WebViewFragment.KEY_URL, url)
+            putSerializable(WebViewFragment.KEY_SECTION, item)
         })
     }
 

@@ -1,7 +1,10 @@
+@file:Suppress("ObjectLiteralToLambda")
+
 package com.renatsayf.androidcheatsheet.ui.sections.webview
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.renatsayf.androidcheatsheet.R
 import com.renatsayf.androidcheatsheet.databinding.FragmentReadmeBinding
+import com.renatsayf.androidcheatsheet.models.SectionHeader
 
 private const val WEB_VIEW_BUNDLE = "WEB_VIEW_BUNDLE"
 private const val START_URL = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/README.md"
@@ -21,7 +25,7 @@ private const val START_URL = "https://github.com/RenatSayf/AndroidCheatSheet/bl
 class WebViewFragment : Fragment() {
 
     companion object {
-        const val KEY_URL = "KEY_URL"
+        const val KEY_SECTION = "KEY_SECTION"
     }
 
     private lateinit var binding: FragmentReadmeBinding //TODO VIewBinding Step 2
@@ -44,7 +48,7 @@ class WebViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val url = arguments?.getString(KEY_URL)
+        val section = arguments?.getSerializable(KEY_SECTION) as SectionHeader
 
         with(binding) {
 
@@ -56,6 +60,12 @@ class WebViewFragment : Fragment() {
                     javaScriptEnabled = true
                     builtInZoomControls = false
                 }
+
+                setFindListener(object : WebView.FindListener {
+                    override fun onFindResultReceived(p0: Int, p1: Int, p2: Boolean) {
+                        return
+                    }
+                })
 
                 //region TODO WebView - Page listeners
                 webViewClient = object : WebViewClient() {
@@ -73,14 +83,14 @@ class WebViewFragment : Fragment() {
                 //endregion
                 //region TODO WebView - Restore state
                 if (savedInstanceState == null) {
-                    loadUrl(url ?: START_URL)
+                    loadUrl(section.url)
                 }
                 else {
                     val bundle = savedInstanceState.getBundle(WEB_VIEW_BUNDLE)
                     if (bundle != null) {
                         restoreState(bundle)
                     } else {
-                        loadUrl(url ?: START_URL)
+                        loadUrl(section.url)
                     }
                 }
                 //endregion
@@ -91,12 +101,22 @@ class WebViewFragment : Fragment() {
                 when(state) {
                     is WebViewViewModel.State.PageFinished -> {
                         binding.progressBar.visibility = View.GONE
+                        if (!section.deepLink.isNullOrEmpty()) {
+                            webViewVM.setState(WebViewViewModel.State.ThereIsDemonstration(section.deepLink))
+                            webView.findAllAsync(":heavy_check_mark:")
+                        }
                     }
                     is WebViewViewModel.State.PageStarted -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
                     WebViewViewModel.State.PageClosed -> {
                         binding.progressBar.visibility = View.VISIBLE
+                    }
+                    is WebViewViewModel.State.ThereIsDemonstration -> {
+                        binding.btnShowResult.visibility = View.VISIBLE
+                        binding.btnShowResult.setOnClickListener {
+                            findNavController().navigate(Uri.parse(state.deepLink))
+                        }
                     }
                 }
             }
