@@ -12,7 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/recycler_view_example_title"
-        app:subtitle="@string/recycler_view_example_subtitle"/>
+        app:subtitle="@string/recycler_view_example_subtitle"
+        android:background="@color/color_fg_default"
+        app:titleTextColor="@color/white"
+        app:subtitleTextColor="@color/white"/>
 
     <View
         android:layout_width="match_parent"

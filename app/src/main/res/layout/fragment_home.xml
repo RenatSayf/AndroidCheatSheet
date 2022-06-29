@@ -15,6 +15,9 @@
         android:layout_height="wrap_content"
         app:title="@string/app_title"
         app:subtitle="@string/app_subtitle"
+        android:background="@color/color_fg_default"
+        app:titleTextColor="@color/white"
+        app:subtitleTextColor="@color/white"
         />
 
     <View
