@@ -1,7 +1,7 @@
 package com.renatsayf.androidcheatsheet.models
 
 
-//region Hint. The model of recycler view item
+//region Hint. Create the model of recycler view item
 data class SimpleItem(
     val header: String,
     val content: String
