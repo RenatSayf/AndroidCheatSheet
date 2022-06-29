@@ -15,7 +15,7 @@
         app:subtitle="@string/recycler_view_example_subtitle"
         android:background="@color/color_fg_default"
         app:titleTextColor="@color/white"
-        app:subtitleTextColor="@color/white"/>
+        app:subtitleTextColor="@color/white_alpha_0_7"/>
 
     <View
         android:layout_width="match_parent"
