@@ -7,3 +7,5 @@
 6. [Inherit your adapter from RecyclerView.Adapter<YourViewHolder>](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/SimpleAdapter.kt#:~:text=RecyclerView.%20Inherit%20your%20adapter%20from%20RecyclerView.Adapter%3CYourViewHolder%3E)
 7. [Override necessary methods](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/SimpleAdapter.kt#:~:text=region%20Hint.%20RecyclerView.%20Override%20necessary%20methods)
 8. [Interface for callback into fragment](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/SimpleAdapter.kt#:~:text=region%20Hint.%20RecyclerView.%20Interface%20for%20callback%20into%20fragment)
+
+:heavy_check_mark:
