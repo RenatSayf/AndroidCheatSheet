@@ -8,5 +8,8 @@ xxxxxxxxxx
 6. [Inherit your adapter from RecyclerView.Adapter<YourViewHolder>](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/SimpleAdapter.kt#:~:text=RecyclerView.%20Inherit%20your%20adapter%20from%20RecyclerView.Adapter%3CYourViewHolder%3E)
 7. [Override necessary methods](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/SimpleAdapter.kt#:~:text=region%20Hint.%20RecyclerView.%20Override%20necessary%20methods)
 8. [Interface for callback into fragment](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/SimpleAdapter.kt#:~:text=region%20Hint.%20RecyclerView.%20Interface%20for%20callback%20into%20fragment)
+9. [Function for items adding](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/SimpleAdapter.kt#:~:text=region%20Hint.%20RecyclerView.%20Function%20for%20items%20adding)
+10. [Adapter initialization](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/SimpleListFragment.kt#:~:text=region%20Hint.%20RecyclerView.%20Adapter%20initialization)
+11. [Items adding and display](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/SimpleListFragment.kt#:~:text=region%20Hint.%20RecyclerView.%20Items%20adding%20and%20display)
 
 -------------------------
