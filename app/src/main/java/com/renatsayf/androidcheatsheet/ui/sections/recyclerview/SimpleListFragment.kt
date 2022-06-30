@@ -20,10 +20,12 @@ private const val BACK_URL = "https://github.com/RenatSayf/AndroidCheatSheet/blo
 class SimpleListFragment : Fragment(), SimpleAdapter.Listener {
 
     private lateinit var binding: FragmentSimpleListBinding
-    private lateinit var viewModel: SimpleListViewModel
+
+    //region Hint. RecyclerView. Adapter initialization
     private val rvAdapter: SimpleAdapter by lazy {
         SimpleAdapter(listener = this)
     }
+    //endregion
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,12 +41,13 @@ class SimpleListFragment : Fragment(), SimpleAdapter.Listener {
 
         with(binding) {
 
+            //region Hint. RecyclerView. Items adding and display
             rvAdapter.addItems(SimpleItem.getMockData())
-
             rvExample.apply {
                 addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
                 adapter = rvAdapter
             }
+            //endregion
 
         }
     }
