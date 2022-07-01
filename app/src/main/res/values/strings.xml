@@ -8,6 +8,7 @@
     <string name="header_view_binding">View binding</string>
     <string name="header_web_view">WebView</string>
     <string name="header_recycler_view">Recycler view</string>
+    <string name="header_view_model">ViewModel</string>
 
     <string name="recycler_view_example_title">RecyclerView.</string>
     <string name="recycler_view_example_subtitle">Демонстрация работы</string>

@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_readmeFragment_to_simpleListFragment"
             app:destination="@id/simpleListFragment" />
+        <action
+            android:id="@+id/action_readmeFragment_to_myFragment"
+            app:destination="@id/myFragment" />
     </fragment>
 
     <fragment
@@ -46,6 +49,18 @@
             android:defaultValue="https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/recycler_view/Simple%20example.md" />
         <action
             android:id="@+id/action_simpleListFragment_to_readmeFragment"
+            app:destination="@id/readmeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myFragment"
+        android:name="com.renatsayf.androidcheatsheet.ui.sections.viewmodel.fabric.MyFragment"
+        android:label="fragment_my"
+        tools:layout="@layout/fragment_my">
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="app://view-model/factory" />
+        <action
+            android:id="@+id/action_myFragment_to_readmeFragment"
             app:destination="@id/readmeFragment" />
     </fragment>
 

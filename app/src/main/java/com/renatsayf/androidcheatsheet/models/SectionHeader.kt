@@ -34,6 +34,12 @@ data class SectionHeader(
                     url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/Recycler%20view.md",
                     isDemonstration = true,
                     deepLink = "app://recycler_view/simple_list"
+                ),
+                SectionHeader(
+                    header = App.INSTANCE.getString(R.string.header_view_model),
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections",
+                    isDemonstration = true,
+                    deepLink = "app://view-model/factory"
                 )
             )
         }
