@@ -1,2 +1,2 @@
 # ViewModel
-1. [Factory](sections/view_model/ViewModel factory.md)
+1. [Factory]()
