@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.renatsayf.androidcheatsheet.domain.NetRepository
+import com.renatsayf.androidcheatsheet.domain.net.NetRepository
 
 @Suppress("UNCHECKED_CAST")
 class MyViewModel(private val repository: NetRepository) : ViewModel() {
@@ -25,7 +25,6 @@ class MyViewModel(private val repository: NetRepository) : ViewModel() {
     private var _state = MutableLiveData<State>()
     val state: LiveData<State> = _state
     fun setState(state: State) {
-        repository
         _state.value = state
     }
 
