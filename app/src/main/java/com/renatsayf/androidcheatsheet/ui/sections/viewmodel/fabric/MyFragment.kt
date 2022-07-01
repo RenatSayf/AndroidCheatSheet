@@ -33,6 +33,8 @@ class MyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.setState(MyViewModel.State.Loading)
+
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when(state) {
                 MyViewModel.State.Loading -> {

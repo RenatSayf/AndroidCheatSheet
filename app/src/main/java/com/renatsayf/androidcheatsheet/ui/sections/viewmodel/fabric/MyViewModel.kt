@@ -22,5 +22,11 @@ class MyViewModel(private val repository: NetRepository) : ViewModel() {
 
     private var _state = MutableLiveData<State>()
     val state: LiveData<State> = _state
+    fun setState(state: State) {
+        repository
+        _state.value = state
+    }
+
+
 }
 
