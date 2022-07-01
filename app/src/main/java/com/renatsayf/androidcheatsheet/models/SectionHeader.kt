@@ -37,7 +37,7 @@ data class SectionHeader(
                 ),
                 SectionHeader(
                     header = App.INSTANCE.getString(R.string.header_view_model),
-                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections",
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/ViewModel.md",
                     isDemonstration = true,
                     deepLink = "app://view-model/factory"
                 )
