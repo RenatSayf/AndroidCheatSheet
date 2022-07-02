@@ -17,7 +17,7 @@ class MyViewModel(private val repository: NetRepository) : ViewModel() {
             return MyViewModel(repository = NetRepositoryModule.getRepository()) as T
         }
     }
-    //endregion
+    //endregion ViewModel.Factory step1
 
     sealed class State {
         object Loading: State()
