@@ -9,8 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.ValueCallback
-import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
@@ -18,10 +16,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.renatsayf.androidcheatsheet.R
-import com.renatsayf.androidcheatsheet.databinding.FragmentReadmeBinding
+import com.renatsayf.androidcheatsheet.databinding.FragmentWebViewBinding
 import com.renatsayf.androidcheatsheet.models.SectionHeader
 import java.net.URLDecoder
-import java.net.URLEncoder
 
 private const val WEB_VIEW_BUNDLE = "WEB_VIEW_BUNDLE"
 private const val START_URL = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/README.md"
@@ -33,7 +30,7 @@ class WebViewFragment : Fragment() {
     }
 
     //region Hint VIewBinding Step2
-    private lateinit var binding: FragmentReadmeBinding
+    private lateinit var binding: FragmentWebViewBinding
     //endregion VIewBinding Step2
 
     private val webViewVM: WebViewViewModel by lazy {
@@ -46,7 +43,7 @@ class WebViewFragment : Fragment() {
     ): View {
 
         //region Hint VIewBinding Step3
-        binding = FragmentReadmeBinding.inflate(inflater, container, false)
+        binding = FragmentWebViewBinding.inflate(inflater, container, false)
         return binding.root
         //endregion VIewBinding Step3
     }

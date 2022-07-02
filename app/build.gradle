@@ -67,10 +67,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     //endregion
 
-    //region TODO Navigation Step 1
+    //region Hint Navigation_step1
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.0"
-    //endregion
+    //endregion Navigation_step1
 
     //region Hint Ktor.step1
     implementation("io.ktor:ktor-client-core:2.0.3")
