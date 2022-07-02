@@ -4,16 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.renatsayf.androidcheatsheet.di.manually.NetRepositoryModule
 import com.renatsayf.androidcheatsheet.domain.net.NetRepository
 
 @Suppress("UNCHECKED_CAST")
 class MyViewModel(private val repository: NetRepository) : ViewModel() {
 
     //region Hint ViewModel.Factory step1
-    class Factory() : ViewModelProvider.Factory {
+    class Factory : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == MyViewModel::class.java)
-            return MyViewModel(repository = NetRepository()) as T
+            return MyViewModel(repository = NetRepositoryModule.getRepository()) as T
         }
     }
     //endregion
@@ -28,6 +29,8 @@ class MyViewModel(private val repository: NetRepository) : ViewModel() {
         _state.value = state
     }
 
-
+    init {
+        repository
+    }
 }
 

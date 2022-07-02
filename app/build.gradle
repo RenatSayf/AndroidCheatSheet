@@ -34,6 +34,18 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    flavorDimensions 'network'
+    productFlavors {
+        localhost {
+            dimension 'network'
+            buildConfigField 'String', 'HOST', '\"localhost\"'
+        }
+        remote {
+            dimension 'network'
+            buildConfigField 'String', 'HOST', '\"remote\"'
+        }
+    }
 }
 
 dependencies {

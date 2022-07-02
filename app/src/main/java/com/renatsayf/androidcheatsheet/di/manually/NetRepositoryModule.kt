@@ -1,12 +1,13 @@
 package com.renatsayf.androidcheatsheet.di.manually
 
-import com.renatsayf.androidcheatsheet.data.network.ktor.KtorClient
-import io.ktor.client.*
+import com.renatsayf.androidcheatsheet.BuildConfig
+import com.renatsayf.androidcheatsheet.domain.net.MockNetRepository
+import com.renatsayf.androidcheatsheet.domain.net.NetRepository
+
 
 object NetRepositoryModule {
 
-    fun getKtorClient(): HttpClient {
-
-        return KtorClient.client
+    fun getRepository(): NetRepository {
+        return if (BuildConfig.HOST == "localhost") MockNetRepository() else NetRepository()
     }
 }
