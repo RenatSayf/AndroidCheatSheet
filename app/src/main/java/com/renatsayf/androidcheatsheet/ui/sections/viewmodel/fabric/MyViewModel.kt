@@ -10,14 +10,14 @@ import com.renatsayf.androidcheatsheet.domain.net.NetRepository
 @Suppress("UNCHECKED_CAST")
 class MyViewModel(private val repository: NetRepository) : ViewModel() {
 
-    //region Hint ViewModel.Factory step1
+    //region Hint ViewModel Factory step1
     class Factory : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == MyViewModel::class.java)
             return MyViewModel(repository = NetRepositoryModule.getRepository()) as T
         }
     }
-    //endregion ViewModel.Factory step1
+    //endregion ViewModel Factory step1
 
     sealed class State {
         object Loading: State()

@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.ValueCallback
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
@@ -18,6 +20,8 @@ import androidx.navigation.fragment.findNavController
 import com.renatsayf.androidcheatsheet.R
 import com.renatsayf.androidcheatsheet.databinding.FragmentReadmeBinding
 import com.renatsayf.androidcheatsheet.models.SectionHeader
+import java.net.URLDecoder
+import java.net.URLEncoder
 
 private const val WEB_VIEW_BUNDLE = "WEB_VIEW_BUNDLE"
 private const val START_URL = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/README.md"
@@ -81,9 +85,14 @@ class WebViewFragment : Fragment() {
                     override fun onPageFinished(view: WebView?, url: String?) {
                         super.onPageFinished(view, url)
                         webViewVM.setState(WebViewViewModel.State.PageFinished(url ?: START_URL))
-                        webView.findAllAsync(getString(R.string.demo_sign))
+                        val substringAfter = url?.substringAfter("text=", "")
+                        substringAfter?.let {
+                            val decodeString = URLDecoder.decode(it, "UTF-8")
+                            webView.findAllAsync(decodeString)
+                        }
                     }
                 }
+
                 //endregion
                 //region TODO WebView - Restore state
                 if (savedInstanceState == null) {
@@ -124,6 +133,8 @@ class WebViewFragment : Fragment() {
                     }
                 }
             }
+
+            //webView.evaluateJavascript("") { }
         }
     }
 
