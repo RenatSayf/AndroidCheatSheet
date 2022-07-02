@@ -32,7 +32,9 @@ class WebViewFragment : Fragment() {
         const val KEY_SECTION = "KEY_SECTION"
     }
 
-    private lateinit var binding: FragmentReadmeBinding //TODO VIewBinding Step 2
+    //region Hint VIewBinding Step2
+    private lateinit var binding: FragmentReadmeBinding
+    //endregion VIewBinding Step2
 
     private val webViewVM: WebViewViewModel by lazy {
         ViewModelProvider(this)[WebViewViewModel::class.java]
@@ -43,9 +45,10 @@ class WebViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        //TODO VIewBinding Step 3 - Done
+        //region Hint VIewBinding Step3
         binding = FragmentReadmeBinding.inflate(inflater, container, false)
         return binding.root
+        //endregion VIewBinding Step3
     }
 
     @SuppressLint("SetJavaScriptEnabled")
