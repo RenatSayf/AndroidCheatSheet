@@ -77,4 +77,9 @@ dependencies {
     implementation("io.ktor:ktor-client-okhttp:2.0.3")
     implementation("io.ktor:ktor-client-logging:2.0.3")
     //endregion
+
+    //region Hint Room_Enabling_the_library
+    implementation "androidx.room:room-runtime:2.4.2"
+    annotationProcessor "androidx.room:room-compiler:2.4.2"
+    //endregion
 }

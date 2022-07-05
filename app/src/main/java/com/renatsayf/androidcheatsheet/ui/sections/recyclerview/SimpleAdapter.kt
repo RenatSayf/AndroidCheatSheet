@@ -3,6 +3,7 @@ package com.renatsayf.androidcheatsheet.ui.sections.recyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.renatsayf.androidcheatsheet.data.db.room.java.ArticleEntity
 import com.renatsayf.androidcheatsheet.databinding.ItemSimpleViewBinding
 import com.renatsayf.androidcheatsheet.models.SimpleItem
 
@@ -14,7 +15,7 @@ class SimpleAdapter(
 ) : RecyclerView.Adapter<SimpleAdapter.ViewHolder>() //Hint RecyclerView. Inherit your adapter from RecyclerView.Adapter<YourViewHolder>
 {
 
-    private val items = mutableListOf<SimpleItem>()
+    private val items = mutableListOf<ArticleEntity>()
 
     //region Hint. RecyclerView. Override necessary methods
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,7 +33,7 @@ class SimpleAdapter(
     //endregion
 
     //region Hint. RecyclerView. Function for items adding
-    fun addItems(list: List<SimpleItem>) {
+    fun addItems(list: List<ArticleEntity>) {
         items.addAll(list)
         notifyDataSetChanged()
     }
@@ -41,7 +42,7 @@ class SimpleAdapter(
     //region Hint. RecyclerView. Create inner class ViewHolder, which inherently from RecyclerView.ViewHolder
     inner class ViewHolder(private val binding: ItemSimpleViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: SimpleItem) {
+        fun bind(item: ArticleEntity) {
             binding.tvHeader.text = item.header
             binding.tvContent.text = item.content
 
@@ -54,7 +55,7 @@ class SimpleAdapter(
 
     //region Hint. RecyclerView. Interface for callback into fragment
     interface Listener {
-        fun onItemClick(item: SimpleItem)
+        fun onItemClick(item: ArticleEntity)
     }
     //endregion
 }
