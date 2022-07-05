@@ -8,7 +8,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 
-//region Hint Room_Creating the entity
+//region Hint Room_Creating_the_entity
 @Entity(tableName = "article")
 public class ArticleEntity
 {
@@ -21,4 +21,4 @@ public class ArticleEntity
     @ColumnInfo(name = "content")
     public String content;
 }
-//endregion Room_Creating the entity
+//endregion Room_Creating_the_entity
