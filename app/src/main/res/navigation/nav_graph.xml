@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_readmeFragment_to_myFragment"
             app:destination="@id/myFragment" />
+        <action
+            android:id="@+id/action_readmeFragment_to_composeListFragment"
+            app:destination="@id/composeListFragment" />
     </fragment>
 
     <fragment
@@ -62,6 +65,15 @@
         <action
             android:id="@+id/action_myFragment_to_readmeFragment"
             app:destination="@id/readmeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/composeListFragment"
+        android:name="com.renatsayf.androidcheatsheet.ui.sections.recyclerview.compose_list.ComposeListFragment"
+        android:label="fragment_compose_list"
+        tools:layout="@layout/fragment_compose_list">
+        <deepLink
+            android:id="@+id/deepLink3"
+            app:uri="app://recycler_view/compose_list" />
     </fragment>
 
 </navigation>

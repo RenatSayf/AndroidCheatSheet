@@ -117,6 +117,9 @@ class WebViewFragment : Fragment() {
                     }
                     is WebViewViewModel.State.PageStarted -> {
                         binding.progressBar.visibility = View.VISIBLE
+                        if (state.url.contains("app://")) {
+                            findNavController().navigate(Uri.parse(state.url))
+                        }
                     }
                     WebViewViewModel.State.PageClosed -> {
                         binding.progressBar.visibility = View.VISIBLE
