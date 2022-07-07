@@ -1,4 +1,4 @@
-XXXXXXXXXX
+xxxxxxxxxx
 # Compose lazy list
 1. [Gradle. buildFeatures](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/build.gradle#:~:text=Compose_buildFeatures)
 2. [Gradle. composeOptions](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/build.gradle#:~:text=Compose_composeOptions)
