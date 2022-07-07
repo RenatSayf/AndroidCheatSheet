@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.renatsayf.androidcheatsheet.R
 import com.renatsayf.androidcheatsheet.databinding.FragmentWebViewBinding
+import com.renatsayf.androidcheatsheet.models.DeepLinks
 import com.renatsayf.androidcheatsheet.models.SectionHeader
 import java.net.URLDecoder
 
@@ -90,6 +91,9 @@ class WebViewFragment : Fragment() {
                             val decodeString = URLDecoder.decode(it, "UTF-8")
                             webView.findAllAsync(decodeString)
                         }
+
+                        val deepLink = DeepLinks.links[url]
+                        if (deepLink != null) webViewVM.setState(WebViewViewModel.State.ThereIsDemonstration(deepLink))
                     }
                 }
 
@@ -117,9 +121,6 @@ class WebViewFragment : Fragment() {
                     }
                     is WebViewViewModel.State.PageStarted -> {
                         binding.progressBar.visibility = View.VISIBLE
-                        if (state.url.contains("app://")) {
-                            findNavController().navigate(Uri.parse(state.url))
-                        }
                     }
                     WebViewViewModel.State.PageClosed -> {
                         binding.progressBar.visibility = View.VISIBLE
