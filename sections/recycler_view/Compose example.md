@@ -5,3 +5,4 @@
 4. [Creating the list item](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/compose_list/ComposeListFragment.kt#:~:text=Compose_Lazy_list_item)
 5. [Creating the lazy list](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/compose_list/ComposeListFragment.kt#:~:text=Compose_Lazy_list)
 6. [Display the list into layout](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/recyclerview/compose_list/ComposeListFragment.kt#:~:text=Compose_Display_the_list_in_layout)
+7. [Show result (in android app only)](https://app://recycler_view/compose_list)
