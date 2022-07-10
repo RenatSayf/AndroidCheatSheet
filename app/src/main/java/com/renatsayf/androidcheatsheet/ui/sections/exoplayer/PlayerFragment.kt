@@ -87,7 +87,7 @@ class PlayerFragment : Fragment() {
         exoPlayer = ExoPlayer.Builder(requireContext()).build().also { player ->
             binding.videoView.player = player
 
-            val url = "https://storage.googleapis.com/exoplayer-test-media-0/play.mp3"
+            val url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             val mediaItem = MediaItem.fromUri(url)
             player.setMediaItem(mediaItem)
         }
