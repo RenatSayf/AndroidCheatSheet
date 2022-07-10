@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_readmeFragment_to_composeListFragment"
             app:destination="@id/composeListFragment" />
+        <action
+            android:id="@+id/action_readmeFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
     </fragment>
 
     <fragment
@@ -74,6 +77,15 @@
         <deepLink
             android:id="@+id/deepLink3"
             app:uri="app://recycler_view/compose_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.renatsayf.androidcheatsheet.ui.sections.exoplayer.PlayerFragment"
+        android:label="fragment_player"
+        tools:layout="@layout/fragment_player">
+        <deepLink
+            android:id="@+id/deepLink4"
+            app:uri="app://exo_player" />
     </fragment>
 
 </navigation>

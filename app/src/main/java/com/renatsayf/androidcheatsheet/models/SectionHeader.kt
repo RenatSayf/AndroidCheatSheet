@@ -44,6 +44,12 @@ data class SectionHeader(
                 SectionHeader(
                     header = App.INSTANCE.getString(R.string.header_extensions),
                     url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/extensions/Extensions.md"
+                ),
+                SectionHeader(
+                    header = App.INSTANCE.getString(R.string.header_exoplayer),
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/exoplayer/Exoplayer.md",
+                    isDemonstration = true,
+                    deepLink = "app://exo_player"
                 )
             )
         }

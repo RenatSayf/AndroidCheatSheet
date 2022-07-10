@@ -1,5 +1,6 @@
 package com.renatsayf.androidcheatsheet.ui.sections.extentions
 
+import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -9,6 +10,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.renatsayf.androidcheatsheet.BuildConfig
@@ -154,3 +158,15 @@ fun Fragment.showKeyboard() {
     requireContext().showKeyboard(requireView())
 }
 //endregion Hide_and_show_keyboard
+
+fun Activity.hideSystemUi(view: View) {
+    WindowCompat.setDecorFitsSystemWindows(window, false)
+    WindowInsetsControllerCompat(window, view).let { controller ->
+        controller.hide(WindowInsetsCompat.Type.systemBars())
+        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
+}
+
+fun Fragment.hideSystemUi(view: View) {
+    requireActivity().hideSystemUi(view)
+}

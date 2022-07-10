@@ -15,6 +15,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.renatsayf.androidcheatsheet.BuildConfig
 import com.renatsayf.androidcheatsheet.R
 import com.renatsayf.androidcheatsheet.databinding.FragmentWebViewBinding
 import com.renatsayf.androidcheatsheet.models.DeepLinks
@@ -146,9 +147,13 @@ class WebViewFragment : Fragment() {
         super.onSaveInstanceState(outState)
 
         //region TODO WebView - save state
-        val bundle = Bundle()
-        binding.webView.saveState(bundle)
-        outState.putBundle(WEB_VIEW_BUNDLE, bundle)
+        try {
+            val bundle = Bundle()
+            binding.webView.saveState(bundle)
+            outState.putBundle(WEB_VIEW_BUNDLE, bundle)
+        } catch (e: Exception) {
+            if (BuildConfig.DEBUG) e.printStackTrace()
+        }
         //endregion
     }
 
