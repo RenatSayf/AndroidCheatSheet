@@ -127,7 +127,7 @@ fun Fragment.showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
 //endregion Show_toast
 
 
-//region Hint Hide and show keyboard
+//region Hint Hide_and_show_keyboard
 fun Context.hideKeyboard(view: View) {
     try {
         val imm: InputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -153,4 +153,4 @@ fun Context.showKeyboard(view: View) {
 fun Fragment.showKeyboard() {
     requireContext().showKeyboard(requireView())
 }
-//endregion Hide and show keyboard
+//endregion Hide_and_show_keyboard
