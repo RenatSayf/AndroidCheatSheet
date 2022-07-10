@@ -49,7 +49,7 @@ fun Fragment.isNetworkAvailable(): Boolean {
 //endregion Checking_internet_connection
 
 
-//region Hint Show_snack_bar
+//region Hint Show_custom_snack_bar
 fun View.showSnackBar(message: String, isError: Boolean = false): Snackbar {
     val snackBar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
     val rootView = snackBar.view
