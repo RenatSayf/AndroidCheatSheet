@@ -49,8 +49,35 @@ fun Fragment.isNetworkAvailable(): Boolean {
 //endregion Checking_internet_connection
 
 
+//region Hint Show_snack_bar
+fun View.showSnackBar(
+    message: String,
+    anchorView: View? = null,
+    backgroundColor: Int = ContextCompat.getColor(this.context, R.color.black),
+    textColor: Int = ContextCompat.getColor(this.context, R.color.white),
+    length: Int = Snackbar.LENGTH_SHORT
+) {
+    val snack = Snackbar.make(this, message, length)
+    snack.setBackgroundTint(ContextCompat.getColor(context, backgroundColor))
+    snack.setTextColor(ContextCompat.getColor(context, textColor))
+    snack.anchorView = anchorView
+    snack.show()
+}
+
+fun Fragment.showSnackBar(
+    message: String,
+    anchorView: View? = null,
+    backgroundColor: Int = ContextCompat.getColor(requireContext(), R.color.black),
+    textColor: Int = ContextCompat.getColor(requireContext(), R.color.white),
+    length: Int = Snackbar.LENGTH_SHORT
+) {
+    requireView().showSnackBar(message, requireView(), backgroundColor, textColor, length)
+}
+//endregion Show_snack_bar
+
+
 //region Hint Show_custom_snack_bar
-fun View.showSnackBar(message: String, isError: Boolean = false): Snackbar {
+fun View.showCustomSnackBar(message: String, isError: Boolean = false): Snackbar {
     val snackBar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
     val rootView = snackBar.view
     val textView = rootView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
@@ -82,8 +109,8 @@ fun View.showSnackBar(message: String, isError: Boolean = false): Snackbar {
     return snackBar
 }
 
-fun Fragment.showSnackBar(message: String, isError: Boolean = false): Snackbar {
-    return requireView().showSnackBar(message, isError)
+fun Fragment.showCustomSnackBar(message: String, isError: Boolean = false): Snackbar {
+    return requireView().showCustomSnackBar(message, isError)
 }
 //endregion Show_snack_bar
 
