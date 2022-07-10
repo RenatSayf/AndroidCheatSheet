@@ -40,6 +40,10 @@ data class SectionHeader(
                     url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/ViewModel.md",
                     isDemonstration = true,
                     deepLink = "app://view-model/factory"
+                ),
+                SectionHeader(
+                    header = App.INSTANCE.getString(R.string.header_extensions),
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/Extensions.md"
                 )
             )
         }
