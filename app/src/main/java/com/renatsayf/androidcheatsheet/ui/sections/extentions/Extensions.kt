@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -124,3 +125,32 @@ fun Fragment.showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
     requireContext().showToast(message, length)
 }
 //endregion Show_toast
+
+
+//region Hint Hide and show keyboard
+fun Context.hideKeyboard(view: View) {
+    try {
+        val imm: InputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+fun Fragment.hideKeyboard() {
+    requireContext().hideKeyboard(requireView())
+}
+
+fun Context.showKeyboard(view: View) {
+    try {
+        val imm: InputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, 0)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+fun Fragment.showKeyboard() {
+    requireContext().showKeyboard(requireView())
+}
+//endregion Hide and show keyboard
