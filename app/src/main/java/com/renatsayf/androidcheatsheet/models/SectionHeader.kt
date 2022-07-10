@@ -43,7 +43,7 @@ data class SectionHeader(
                 ),
                 SectionHeader(
                     header = App.INSTANCE.getString(R.string.header_extensions),
-                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/Extensions.md"
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/extensions/Extensions.md"
                 )
             )
         }
