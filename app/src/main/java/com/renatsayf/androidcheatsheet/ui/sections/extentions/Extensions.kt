@@ -159,6 +159,7 @@ fun Fragment.showKeyboard() {
 }
 //endregion Hide_and_show_keyboard
 
+//region Hint Hide_system_ui
 fun Activity.hideSystemUi(view: View) {
     WindowCompat.setDecorFitsSystemWindows(window, false)
     WindowInsetsControllerCompat(window, view).let { controller ->
@@ -170,3 +171,4 @@ fun Activity.hideSystemUi(view: View) {
 fun Fragment.hideSystemUi(view: View) {
     requireActivity().hideSystemUi(view)
 }
+//endregion Hide_system_ui

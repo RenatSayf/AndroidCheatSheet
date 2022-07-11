@@ -112,10 +112,10 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.1'
     //endregion Jetpack_Compose
 
-    //region Hint ExoPlayer
+    //region Hint ExoPlayer Enabling_the_library
     def mediaVersion = "1.0.0-beta01"
     implementation "androidx.media3:media3-exoplayer:$mediaVersion"
     implementation "androidx.media3:media3-ui:$mediaVersion"
     implementation "androidx.media3:media3-exoplayer-dash:$mediaVersion"
-    //endregion ExoPlayer
+    //endregion ExoPlayer Enabling_the_library
 }

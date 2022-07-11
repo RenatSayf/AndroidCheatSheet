@@ -20,8 +20,6 @@ class PlayerFragment : Fragment() {
         ViewModelProvider(this)[PlayerViewModel::class.java]
     }
 
-    private var exoPlayer: ExoPlayer? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,12 +28,11 @@ class PlayerFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-
-    }
-
+    // Hint Exoplayer_Initialization_call. Android API level 24 and higher supports multiple windows. As your app can be visible,
+    //  but not active in split window mode, you need to initialize the player in onStart.
+    //  Android API level 23 and lower requires you to wait as long as possible until you grab
+    //  resources, so you wait until onResume before initializing the player.
     override fun onStart() {
         super.onStart()
 
@@ -48,6 +45,7 @@ class PlayerFragment : Fragment() {
         super.onResume()
 
         hideSystemUi(binding.videoView)
+
         if ((Util.SDK_INT <= 23 || exoPlayer == null)) {
             initializePlayer()
         }
@@ -57,11 +55,13 @@ class PlayerFragment : Fragment() {
 
                 }
                 is PlayerViewModel.State.Current -> {
+                    //region Hint Exoplayer_Restore_the_state_from_viewModel
                     exoPlayer?.let {
                         it.playWhenReady = state.playerState.playWhenReady
                         it.seekTo(state.playerState.currentItem, state.playerState.playbackPosition)
                         it.prepare()
                     }
+                    //endregion Exoplayer_Restore_the_state_from_viewModel
                 }
             }
         }
@@ -82,6 +82,9 @@ class PlayerFragment : Fragment() {
         }
     }
 
+
+    //region Hint Exoplayer_initialization
+    private var exoPlayer: ExoPlayer? = null
     private fun initializePlayer() {
 
         exoPlayer = ExoPlayer.Builder(requireContext()).build().also { player ->
@@ -92,9 +95,13 @@ class PlayerFragment : Fragment() {
             player.setMediaItem(mediaItem)
         }
     }
+    //endregion Exoplayer_initialization
 
+    //region Hint Exoplayer_release
     private fun releasePlayer() {
         exoPlayer?.let { player ->
+
+            //region Hint Exoplayer_Save_state_into_viewModel
             viewModel.setState(PlayerViewModel.State.Current(
                 PlayerViewModel.PlayerState(
                     playWhenReady = player.playWhenReady,
@@ -102,8 +109,10 @@ class PlayerFragment : Fragment() {
                     playbackPosition = player.currentPosition
                 )
             ))
+            //endregion Exoplayer_Save_state_into_viewModel
             player.release()
         }
         exoPlayer = null
     }
+    //endregion Exoplayer_release
 }
