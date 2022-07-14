@@ -16,8 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidCheatSheet"
         tools:targetApi="31">
+
+        <!--Hint WebView_android:configChanges_to_do_not_reload_screen_after_rotation-->
         <activity
             android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden|keyboard"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

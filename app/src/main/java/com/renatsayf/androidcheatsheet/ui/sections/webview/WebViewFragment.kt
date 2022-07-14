@@ -64,7 +64,8 @@ class WebViewFragment : Fragment() {
                 canGoBack()
                 settings.apply {
                     javaScriptEnabled = true
-                    builtInZoomControls = false
+                    setSupportMultipleWindows(true)
+                    javaScriptCanOpenWindowsAutomatically = true
                 }
 
                 setFindListener(object : WebView.FindListener {
@@ -95,6 +96,16 @@ class WebViewFragment : Fragment() {
 
                         val deepLink = DeepLinks.links[url]
                         if (deepLink != null) webViewVM.setState(WebViewViewModel.State.ThereIsDemonstration(deepLink))
+                    }
+
+                    override fun shouldOverrideUrlLoading(
+                        view: WebView?,
+                        url: String?
+                    ): Boolean {
+                        url?.let {
+                            view?.loadUrl(it)
+                        }
+                        return true
                     }
                 }
 
