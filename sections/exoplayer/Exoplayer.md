@@ -7,3 +7,6 @@
 6. [Exoplayer viewModel](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/exoplayer/PlayerViewModel.kt#:~:text=Exoplayer_viewModel)
 7. [Save state into viewModel](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/exoplayer/PlayerFragment.kt#:~:text=Exoplayer_Save_state_into_viewModel)
 8. [Restore the state from viewModel](https://github.com/RenatSayf/AndroidCheatSheet/blob/master/app/src/main/java/com/renatsayf/androidcheatsheet/ui/sections/exoplayer/PlayerFragment.kt#:~:text=Exoplayer_Restore_the_state_from_viewModel)
+
+
+- [Media streaming with ExoPlayer. Google codelab](https://developer.android.com/codelabs/exoplayer-intro#0)
