@@ -1,4 +1,4 @@
-const findNodeByContent = (text, root = document.body) => {
+const findNodeByContent = (text, color  = "aliceblue", root = document.body) => {
   const treeWalker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
 
   const nodeList = [];
@@ -11,9 +11,15 @@ const findNodeByContent = (text, root = document.body) => {
     }
   };
 
+  nodeList.forEach(function(item) { item.parentElement.style.backgroundColor = color })
+
   return nodeList;
 }
 
-let span = findNodeByContent('TODO VIewBinding Step 3');
+let span = findNodeByContent('Hint VIewBinding Step2');
 
 span[0].style.backgroundColor = "red";
+
+span.forEach(function(item) {
+    item.style.backgroundColor = "red"
+'red'});

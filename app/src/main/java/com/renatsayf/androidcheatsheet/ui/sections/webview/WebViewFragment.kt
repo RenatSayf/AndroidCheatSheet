@@ -64,8 +64,8 @@ class WebViewFragment : Fragment() {
                 canGoBack()
                 settings.apply {
                     javaScriptEnabled = true
-                    setSupportMultipleWindows(true)
-                    javaScriptCanOpenWindowsAutomatically = true
+//                    setSupportMultipleWindows(true)
+//                    javaScriptCanOpenWindowsAutomatically = true
                 }
 
                 setFindListener(object : WebView.FindListener {
@@ -81,32 +81,33 @@ class WebViewFragment : Fragment() {
                 webViewClient = object : WebViewClient() {
 
                     override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                        super.onPageStarted(view, url, favicon)
+                        //super.onPageStarted(view, url, favicon)
                         webViewVM.setState(WebViewViewModel.State.PageStarted(url ?: START_URL))
                     }
 
                     override fun onPageFinished(view: WebView?, url: String?) {
-                        super.onPageFinished(view, url)
+                        //super.onPageFinished(view, url)
                         webViewVM.setState(WebViewViewModel.State.PageFinished(url ?: START_URL))
                         val substringAfter = url?.substringAfter("text=", "")
                         substringAfter?.let {
                             val decodeString = URLDecoder.decode(it, "UTF-8")
-                            webView.findAllAsync(decodeString)
+                            //webView.findAllAsync(decodeString)
+                            webView.evaluateJavascript(javaScript(decodeString), null)
                         }
 
                         val deepLink = DeepLinks.links[url]
                         if (deepLink != null) webViewVM.setState(WebViewViewModel.State.ThereIsDemonstration(deepLink))
                     }
 
-                    override fun shouldOverrideUrlLoading(
-                        view: WebView?,
-                        url: String?
-                    ): Boolean {
-                        url?.let {
-                            view?.loadUrl(it)
-                        }
-                        return true
-                    }
+//                    override fun shouldOverrideUrlLoading(
+//                        view: WebView?,
+//                        url: String?
+//                    ): Boolean {
+//                        url?.let {
+//                            view?.loadUrl(it)
+//                        }
+//                        return true
+//                    }
                 }
 
                 //endregion
@@ -149,8 +150,6 @@ class WebViewFragment : Fragment() {
                     }
                 }
             }
-
-            //webView.evaluateJavascript("") { }
         }
     }
 
@@ -190,6 +189,22 @@ class WebViewFragment : Fragment() {
                 //endregion
             }
         })
+    }
+
+    private fun javaScript(targetText: String): String {
+        return """const findNodeByContent = (text, color  = "aliceblue", root = document.body) => {
+  const treeWalker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodeList = [];
+  while (treeWalker.nextNode()) {
+    const node = treeWalker.currentNode;
+    if (node.nodeType === Node.TEXT_NODE && node.textContent.includes(text)) {
+      nodeList.push(node.parentNode);
+    }
+  };
+  nodeList.forEach(function(item) { item.parentElement.style.backgroundColor = color })
+  return nodeList;
+};
+findNodeByContent("$targetText");"""
     }
 
 }

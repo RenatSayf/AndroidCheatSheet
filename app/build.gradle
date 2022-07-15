@@ -30,14 +30,12 @@ android {
         jvmTarget = '1.8'
     }
 
-    //region Hint ViewBinding Step1
+
     buildFeatures {
-        viewBinding true
-        //region Hint Compose_buildFeatures
-        compose = true
-        //endregion
+        viewBinding true //Hint ViewBinding_Step1        
+        compose = true //Hint Compose_buildFeatures
     }
-    //endregion ViewBinding Step1
+
 
     //region Hint Compose_composeOptions
     composeOptions {
