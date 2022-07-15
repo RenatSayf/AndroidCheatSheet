@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.ValueCallback
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
@@ -92,7 +93,9 @@ class WebViewFragment : Fragment() {
                         substringAfter?.let {
                             val decodeString = URLDecoder.decode(it, "UTF-8")
                             //webView.findAllAsync(decodeString)
-                            webView.evaluateJavascript(javaScript(decodeString), null)
+                            webView.evaluateJavascript(javaScript(decodeString)) { str ->
+                                str
+                            }
                         }
 
                         val deepLink = DeepLinks.links[url]
