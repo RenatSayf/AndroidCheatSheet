@@ -3,7 +3,9 @@
 package com.renatsayf.androidcheatsheet.ui.sections.webview
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Network
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +23,10 @@ import com.renatsayf.androidcheatsheet.R
 import com.renatsayf.androidcheatsheet.databinding.FragmentWebViewBinding
 import com.renatsayf.androidcheatsheet.models.DeepLinks
 import com.renatsayf.androidcheatsheet.models.SectionHeader
+import com.renatsayf.androidcheatsheet.ui.sections.extentions.AppConnectionListener
+import com.renatsayf.androidcheatsheet.ui.sections.extentions.internetConnectionListener
+import com.renatsayf.androidcheatsheet.ui.sections.extentions.showSnackBar
+import com.renatsayf.androidcheatsheet.ui.sections.extentions.showToast
 import java.net.URLDecoder
 
 private const val WEB_VIEW_BUNDLE = "WEB_VIEW_BUNDLE"
@@ -172,6 +178,17 @@ class WebViewFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        //region Hint Monitoring_the_internet_connection._Call.
+        internetConnectionListener(listener = object : AppConnectionListener {
+            override fun onAvailable(network: Network) {
+
+            }
+            override fun onLost(network: Network) {
+                showSnackBar("Internet is not available")
+            }
+        })
+        //endregion
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {

@@ -3,9 +3,13 @@ package com.renatsayf.androidcheatsheet.ui.sections.extentions
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.Network
 import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.os.Build
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
@@ -53,6 +57,56 @@ fun Fragment.isNetworkAvailable(): Boolean {
 }
 //endregion Checking_internet_connection
 
+//region Hint Monitoring_the_internet_connection
+fun Context.internetConnectionListener(listener: AppConnectionListener) {
+
+    val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        connectivityManager.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                listener.onAvailable(network)
+            }
+            override fun onLost(network: Network) {
+                //listener.onLost(network)
+            }
+            override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
+                if (!networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) &&
+                    !networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    listener.onLost(network)
+                }
+            }
+        })
+    }
+    else {
+        val networkRequest =
+            NetworkRequest.Builder().addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .build()
+        connectivityManager.registerNetworkCallback(networkRequest, object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                listener.onAvailable(network)
+            }
+            override fun onLost(network: Network) {
+                //listener.onLost(network)
+            }
+            override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
+                if (!networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) &&
+                    !networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    listener.onLost(network)
+                }
+            }
+        })
+    }
+}
+
+fun Fragment.internetConnectionListener(listener: AppConnectionListener) {
+    requireContext().internetConnectionListener(listener)
+}
+//endregion Monitoring_the_internet_connection
+
+interface AppConnectionListener {
+    fun onAvailable(network: Network)
+    fun onLost(network: Network)
+}
 
 //region Hint Show_snack_bar
 fun View.showSnackBar(
@@ -172,3 +226,21 @@ fun Fragment.hideSystemUi(view: View) {
     requireActivity().hideSystemUi(view)
 }
 //endregion Hide_system_ui
+
+//region Hint Hide_status_bar
+fun Activity.hideStatusBar() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        try {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } catch (e: Exception) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
+    } else {
+        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+    }
+}
+
+fun Fragment.hideStatusBar() {
+    requireActivity().hideStatusBar()
+}
+//endregion Hide_status_bar
