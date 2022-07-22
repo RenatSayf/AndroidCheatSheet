@@ -18,6 +18,8 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.material.snackbar.Snackbar
 import com.renatsayf.androidcheatsheet.BuildConfig
 import com.renatsayf.androidcheatsheet.R
@@ -67,13 +69,7 @@ fun Context.internetConnectionListener(listener: AppConnectionListener) {
                 listener.onAvailable(network)
             }
             override fun onLost(network: Network) {
-                //listener.onLost(network)
-            }
-            override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
-                if (!networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) &&
-                    !networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                    listener.onLost(network)
-                }
+                listener.onLost(network)
             }
         })
     }
@@ -86,13 +82,7 @@ fun Context.internetConnectionListener(listener: AppConnectionListener) {
                 listener.onAvailable(network)
             }
             override fun onLost(network: Network) {
-                //listener.onLost(network)
-            }
-            override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
-                if (!networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) &&
-                    !networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                    listener.onLost(network)
-                }
+                listener.onLost(network)
             }
         })
     }
@@ -101,36 +91,41 @@ fun Context.internetConnectionListener(listener: AppConnectionListener) {
 fun Fragment.internetConnectionListener(listener: AppConnectionListener) {
     requireContext().internetConnectionListener(listener)
 }
-//endregion Monitoring_the_internet_connection
+
+fun Fragment.internetConnectionLiveData() : LiveData<Boolean?> {
+
+    val isConnection = MutableLiveData<Boolean>(null)
+    requireContext().internetConnectionListener(object : AppConnectionListener {
+        override fun onAvailable(network: Network) {
+            isConnection.postValue(true)
+        }
+
+        override fun onLost(network: Network) {
+            isConnection.postValue(false)
+        }
+    })
+    return  isConnection
+}
 
 interface AppConnectionListener {
     fun onAvailable(network: Network)
     fun onLost(network: Network)
 }
+//endregion Monitoring_the_internet_connection
 
 //region Hint Show_snack_bar
 fun View.showSnackBar(
     message: String,
-    anchorView: View? = null,
-    backgroundColor: Int = ContextCompat.getColor(this.context, R.color.black),
-    textColor: Int = ContextCompat.getColor(this.context, R.color.white),
     length: Int = Snackbar.LENGTH_SHORT
 ) {
-    val snack = Snackbar.make(this, message, length)
-    snack.setBackgroundTint(ContextCompat.getColor(context, backgroundColor))
-    snack.setTextColor(ContextCompat.getColor(context, textColor))
-    snack.anchorView = anchorView
-    snack.show()
+   Snackbar.make(this, message, length).show()
 }
 
 fun Fragment.showSnackBar(
     message: String,
-    anchorView: View? = null,
-    backgroundColor: Int = ContextCompat.getColor(requireContext(), R.color.black),
-    textColor: Int = ContextCompat.getColor(requireContext(), R.color.white),
     length: Int = Snackbar.LENGTH_SHORT
 ) {
-    requireView().showSnackBar(message, requireView(), backgroundColor, textColor, length)
+    requireView().showSnackBar(message, length)
 }
 //endregion Show_snack_bar
 

@@ -1,14 +1,17 @@
 package com.renatsayf.androidcheatsheet.ui.home
 
+import android.net.Network
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material.Snackbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.renatsayf.androidcheatsheet.R
 import com.renatsayf.androidcheatsheet.databinding.FragmentHomeBinding
 import com.renatsayf.androidcheatsheet.models.SectionHeader
+import com.renatsayf.androidcheatsheet.ui.sections.extentions.*
 import com.renatsayf.androidcheatsheet.ui.sections.webview.WebViewFragment
 
 class HomeFragment : Fragment(), SectionsAdapter.Listener {
@@ -39,6 +42,35 @@ class HomeFragment : Fragment(), SectionsAdapter.Listener {
         findNavController().navigate(R.id.action_homeFragment_to_readmeFragment, Bundle().apply {
             putSerializable(WebViewFragment.KEY_SECTION, item)
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        //region Hint Monitoring_the_internet_connection._Call.
+        //using interface
+        internetConnectionListener(listener = object : AppConnectionListener {
+            override fun onAvailable(network: Network) {
+                showSnackBar("Connection to internet")
+            }
+            override fun onLost(network: Network) {
+                showSnackBar("Internet is not available")
+            }
+        })
+
+        //using live data
+        internetConnectionLiveData().observe(viewLifecycleOwner) { isConnection ->
+            when(isConnection) {
+                true -> {
+                    showToast("Connection to internet")
+                }
+                false -> {
+                    showToast("Internet is not available")
+                }
+                else -> {}
+            }
+        }
+        //endregion
     }
 
 }
