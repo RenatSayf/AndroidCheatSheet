@@ -50,6 +50,12 @@ data class SectionHeader(
                     url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/exoplayer/Exoplayer.md",
                     isDemonstration = true,
                     deepLink = "app://exo_player"
+                ),
+                SectionHeader(
+                    header = App.INSTANCE.getString(R.string.header_camera_x),
+                    url = "https://github.com/RenatSayf/AndroidCheatSheet/blob/master/sections/CameraX.md",
+                    isDemonstration = true,
+                    deepLink = "app://camera_x"
                 )
             )
         }

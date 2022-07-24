@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_readmeFragment_to_playerFragment"
             app:destination="@id/playerFragment" />
+        <action
+            android:id="@+id/action_readmeFragment_to_cameraXFragment"
+            app:destination="@id/cameraXFragment" />
     </fragment>
 
     <fragment
@@ -86,6 +89,15 @@
         <deepLink
             android:id="@+id/deepLink4"
             app:uri="app://exo_player" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraXFragment"
+        android:name="com.renatsayf.androidcheatsheet.ui.sections.camerax.CameraXFragment"
+        android:label="fragment_camera_x"
+        tools:layout="@layout/fragment_camera_x">
+        <deepLink
+            android:id="@+id/deepLink5"
+            app:uri="app://camera_x" />
     </fragment>
 
 </navigation>

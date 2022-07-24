@@ -11,6 +11,7 @@
     <string name="header_view_model">ViewModel</string>
     <string name="header_extensions">Extensions</string>
     <string name="header_exoplayer">Exoplayer</string>
+    <string name="header_camera_x">Camera X</string>
 
     <string name="recycler_view_example_title">RecyclerView</string>
     <string name="recycler_view_example_subtitle">Демонстрация работы</string>
