@@ -111,9 +111,20 @@ dependencies {
     //endregion Jetpack_Compose
 
     //region Hint ExoPlayer Enabling_the_library
-    def mediaVersion = "1.0.0-beta01"
+    def mediaVersion = "1.0.0-beta02"
     implementation "androidx.media3:media3-exoplayer:$mediaVersion"
     implementation "androidx.media3:media3-ui:$mediaVersion"
     implementation "androidx.media3:media3-exoplayer-dash:$mediaVersion"
     //endregion ExoPlayer Enabling_the_library
+
+    //region Hint Camera_X_Enabling_the_library
+    def camerax_version = "1.2.0-alpha03"
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    implementation "androidx.camera:camera-video:${camerax_version}"
+
+    implementation "androidx.camera:camera-view:${camerax_version}"
+    implementation "androidx.camera:camera-extensions:${camerax_version}"
+    //endregion Camera_X_Enabling_the_library
 }
