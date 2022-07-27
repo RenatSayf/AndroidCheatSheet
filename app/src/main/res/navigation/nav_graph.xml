@@ -98,6 +98,14 @@
         <deepLink
             android:id="@+id/deepLink5"
             app:uri="app://camera_x" />
+        <action
+            android:id="@+id/action_cameraXFragment_to_photosFragment"
+            app:destination="@id/photosFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/photosFragment"
+        android:name="com.renatsayf.androidcheatsheet.ui.sections.camerax.photos.PhotosFragment"
+        android:label="fragment_photos"
+        tools:layout="@layout/fragment_photos" />
 
 </navigation>

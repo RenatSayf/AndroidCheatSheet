@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.sections.camerax.photos.PhotosFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="List of photos and videos"
+        app:subtitle="@string/recycler_view_example_subtitle"
+        android:background="@color/color_fg_default"
+        app:titleTextColor="@color/white"
+        app:subtitleTextColor="@color/white_alpha_0_7"
+        />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -7,6 +7,7 @@ import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
@@ -18,11 +19,14 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.renatsayf.androidcheatsheet.BuildConfig
+import com.renatsayf.androidcheatsheet.R
 import com.renatsayf.androidcheatsheet.databinding.FragmentCameraXBinding
+import com.renatsayf.androidcheatsheet.ui.sections.extentions.appPicturesDirName
 import com.renatsayf.androidcheatsheet.ui.sections.extentions.showSnackBar
 import java.text.SimpleDateFormat
 import java.util.*
@@ -39,15 +43,14 @@ class CameraXFragment : Fragment() {
             ).apply {
                 if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
                     add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    add(Manifest.permission.READ_EXTERNAL_STORAGE)
                 }
             }.toTypedArray()
     }
 
     private lateinit var binding: FragmentCameraXBinding
 
-    private val cameraVM: CameraXViewModel by lazy {
-        ViewModelProvider(this)[CameraXViewModel::class.java]
-    }
+    private val cameraVM: CameraXViewModel by activityViewModels()
 
     private var imageCapture: ImageCapture? = null
 
@@ -92,7 +95,11 @@ class CameraXFragment : Fragment() {
                         btnZoomPlus.isEnabled = true
                         btnZoomMinus.isEnabled = true
                     }
-                    CameraXViewModel.State.OnPhotoCompleted -> {
+                    is CameraXViewModel.State.OnPhotoCompleted -> {
+                        state.uri?.let {
+                            cameraVM.addUriToList(it)
+                            findNavController().navigate(R.id.action_cameraXFragment_to_photosFragment)
+                        }
                         progressBar.visibility = View.GONE
                     }
                     CameraXViewModel.State.OnStartPhoto -> {
@@ -142,11 +149,15 @@ class CameraXFragment : Fragment() {
         }
     }
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
+    private fun allPermissionsGranted(): Boolean {
+        return REQUIRED_PERMISSIONS.all {
+            ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
+        }
     }
 
     private fun startCamera(): LiveData<ImageCapture?> {
+
+
 
         val imageCapture = MutableLiveData<ImageCapture>(null)
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
@@ -188,10 +199,17 @@ class CameraXFragment : Fragment() {
         ).format(System.currentTimeMillis())
 
         val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+
+            val dir = Environment.getExternalStoragePublicDirectory(
+                appPicturesDirName
+            )
+            if (!dir.exists()) {
+                dir.mkdir()
+            }
+            put(MediaStore.Images.Media.DATA, "$dir/$fileName")
+
             if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
+                put(MediaStore.Images.Media.RELATIVE_PATH, appPicturesDirName)
             }
         }
 
@@ -203,15 +221,16 @@ class CameraXFragment : Fragment() {
 
         imageCapture.takePicture(
             outPutOptions,
-            ContextCompat.getMainExecutor(requireContext()),
+            requireActivity().mainExecutor,
             object : ImageCapture.OnImageSavedCallback {
+
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    cameraVM.setState(CameraXViewModel.State.OnPhotoCompleted)
+                    cameraVM.setState(CameraXViewModel.State.OnPhotoCompleted(outputFileResults.savedUri))
                     val msg = "Photo capture succeeded: ${outputFileResults.savedUri}"
                     showSnackBar(msg)
                 }
                 override fun onError(exception: ImageCaptureException) {
-                    cameraVM.setState(CameraXViewModel.State.OnPhotoCompleted)
+                    cameraVM.setState(CameraXViewModel.State.OnPhotoCompleted(null))
                     showSnackBar("Photo capture failed: ${exception.message}")
                 }
             }

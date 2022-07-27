@@ -2,11 +2,13 @@ package com.renatsayf.androidcheatsheet.ui.sections.extentions
 
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
+import android.os.Environment
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -239,3 +241,19 @@ fun Fragment.hideStatusBar() {
     requireActivity().hideStatusBar()
 }
 //endregion Hide_status_bar
+
+//region Hint SharedPreferences
+fun Context.appPref(): SharedPreferences {
+    return getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
+}
+
+fun Fragment.appPref(): SharedPreferences {
+    return requireContext().appPref()
+}
+//endregion SharedPreferences
+
+val Context.appPicturesDirName: String
+    get() = Environment.DIRECTORY_PICTURES.plus(this.getString(R.string.app_pictures_dir))
+
+val Fragment.appPicturesDirName: String
+    get() = requireContext().appPicturesDirName
