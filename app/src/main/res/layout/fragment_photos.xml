@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.sections.camerax.photos.PhotosFragment">
 
@@ -16,6 +17,18 @@
         android:background="@color/color_fg_default"
         app:titleTextColor="@color/white"
         app:subtitleTextColor="@color/white_alpha_0_7"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_photos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/photo_item"
+        tools:itemCount="20"
+        app:spanCount="3"
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

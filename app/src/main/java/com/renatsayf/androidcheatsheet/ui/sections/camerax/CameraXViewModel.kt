@@ -27,17 +27,11 @@ class CameraXViewModel(private val app: Application) : AndroidViewModel(app) {
         _state.value = state
     }
 
-    private var _photoUriList = MutableLiveData<MutableList<Uri>>(mutableListOf())
-    val photoUriList: LiveData<MutableList<Uri>> = _photoUriList
-    fun addUriToList(uri: Uri) {
-        _photoUriList.value?.add(uri)
-    }
-
-    fun getAppPictures(): MutableLiveData<List<File>> {
-        val files = MutableLiveData<List<File>>(listOf())
+    fun getAppPictures(): MutableLiveData<List<File>?> {
+        val files = MutableLiveData<List<File>?>()
         viewModelScope.launch(Dispatchers.IO) {
-            val file = Environment.getExternalStoragePublicDirectory(app.appPicturesDirName)
-            val list = file.listFiles()?.toList()
+            val dir = Environment.getExternalStoragePublicDirectory(app.appPicturesDirName)
+            val list = dir.listFiles()?.toList()
             files.postValue(list)
         }
         return files
